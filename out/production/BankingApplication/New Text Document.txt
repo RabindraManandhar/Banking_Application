@@ -1,0 +1,23 @@
+public void deleteUserDetails(Long accNo) {
+        // 1. Delete File related to this account number.
+
+        try {
+            Files.deleteIfExists(Paths.get(dbPath + accNo));
+
+        }
+
+        catch (NoSuchFileException e) {
+            System.out.println("No such file/directory exists.");
+        }
+
+        catch (DirectoryNotEmptyException e) {
+            System.out.println("Directory is not empty");
+        }
+
+        catch (IOException e) {
+            System.out.println("Invalid Permission");
+        }
+
+        System.out.println("Deletion successful");
+
+    }
