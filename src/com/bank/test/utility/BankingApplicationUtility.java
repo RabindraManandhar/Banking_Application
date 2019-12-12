@@ -57,7 +57,11 @@ public class BankingApplicationUtility {
         }
     }
 
-    public void closeAccount() {
+    public User getAccountDetails(Long accountNumber) {
+        return userCrudUtility.getUserDetails(accountNumber);
+    }
 
+    public void closeAccount(Long accountNumber) {
+        userCrudUtility.deleteUser(getAccountDetails(accountNumber));
     }
 }

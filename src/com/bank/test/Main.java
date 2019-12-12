@@ -1,24 +1,42 @@
 package com.bank.test;
 
-import com.bank.test.model.ApplicationMessage;
 import com.bank.test.model.User;
+import com.bank.test.utility.BankingApplicationUtility;
 import com.bank.test.utility.UserUtility;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
 
-        System.out.println("Welcome to the Euro Banking Application");
+    public static Long askAccountNumber() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter your Account Number");
+        long accountNumber = scanner.nextLong();
+
+        return accountNumber;
+    }
+
+    public static Double askAmount() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter amount");
+        Double amount = scanner.nextDouble();
+
+        return amount;
+    }
+
+
+    public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
 
         User user = null;
         UserUtility userUtility = new UserUtility();
         Random random = new Random();
+
+        BankingApplicationUtility bankingApplicationUtility = new BankingApplicationUtility();
+
+        System.out.println("Welcome to the Euro Banking Application");
 
         while (true) {
             System.out.println("1. Create Account");
@@ -47,88 +65,37 @@ public class Main {
                     user.setAddress(address);
                     user.setAmount(0);
 
-                    ApplicationMessage applicationMessage = userUtility.saveUserDetails(user);
-
-                    if (applicationMessage.isSuccess()) {
-                        System.out.println("Your account detail is successfully saved.");
-                    } else {
-                        System.out.println(applicationMessage.getErrorMessage());
-                        System.out.println("Error, Please try again.");
-                    }
-
-                    System.out.println("Your newly created account's detail is:");
-                    System.out.println("Account Number: " + user.getAccountNumber());
-                    System.out.println("Name: " + user.getName());
-                    System.out.println("Address: " + user.getAddress());
-                    System.out.println("Balance: " + user.getAmount());
+                    bankingApplicationUtility.createAccount(user);
                     break;
 
                 case 2:
-                    System.out.println("Enter your Account Number");
-                    long accountNumber = scanner.nextLong();
+//                    Long accountNumber = askAccountNumber();
 
-                    User fetchedUser = userUtility.getUserDetails(accountNumber);
+//                    Double deposit = askAmount();
 
-                    if (fetchedUser == null) {
-
-                        System.out.println("Sorry! This account number doesn't exist in our system.");
-
-                    } else {
-                        System.out.println("Please enter your deposit amount");
-                        double deposit = scanner.nextDouble();
-
-                        fetchedUser.setAmount(deposit + fetchedUser.getAmount());
-
-                        ApplicationMessage depositMessage = userUtility.saveUserDetails(fetchedUser);
-
-                        if (depositMessage.isSuccess()) {
-                            System.out.println("You deposited an amount of " + deposit + " successfully.");
-                        } else {
-                            System.out.println(depositMessage.getErrorMessage());
-                            System.out.println("Error, Your deposit was not successful. Please try again.");
-                        }
-
-                        System.out.println("Balance: " + fetchedUser.getAmount());
-                    }
+                    bankingApplicationUtility.depositAmount(askAccountNumber(), askAmount());
 
                     break;
 
                 case 3:
-                    System.out.println("Enter your account number");
-                    long accountNumber1 = scanner.nextLong();
+//                    Long accountNumber1 = askAccountNumber();
 
-                    User existingUser = userUtility.getUserDetails(accountNumber1);
+//                    Double withdraw = askAmount();
 
-                    if (existingUser == null) {
-
-                        System.out.println("Sorry! This account number doesn't exist in our system.");
-
-                    } else {
-                        System.out.println("Please enter your withdrawal amount");
-                        double withdrawal = scanner.nextDouble();
-
-
-                        if (existingUser.getAmount() < withdrawal) {
-                            System.out.println("You don't have enough balance in your account.");
-                        } else {
-                            existingUser.setAmount(existingUser.getAmount() - withdrawal);
-                            ApplicationMessage withdrawalMessage = userUtility.saveUserDetails(existingUser);
-                            System.out.println("Balance: " + existingUser.getAmount());
-                        }
-                    }
+                    bankingApplicationUtility.withdrawAmount(askAccountNumber(), askAmount());
 
                     break;
 
                 case 4:
-                    System.out.println("Enter your Account Number to see the account details.");
-                    Long accountNo = scanner.nextLong();
-                    userUtility.getUserDetails(accountNo);
+//                    System.out.println("Enter your Account Number to see the account details.");
+//                    Long accountNo = scanner.nextLong();
+                    bankingApplicationUtility.getAccountDetails(askAccountNumber());
                     break;
 
                 case 5:
-                    System.out.println("Enter your Account Number that you want to delete.");
-                    Long accNo = scanner.nextLong();
-                    userUtility.deleteUserDetails(accNo);
+//                    System.out.println("Enter your Account Number that you want to delete.");
+//                    Long accNo = scanner.nextLong();
+                    bankingApplicationUtility.closeAccount(askAccountNumber());
                     break;
 
                 default:
