@@ -1,5 +1,6 @@
 package com.bank.test;
 
+import com.bank.test.model.ApplicationMessage;
 import com.bank.test.model.User;
 import com.bank.test.utility.BankingApplicationUtility;
 import com.bank.test.utility.UserUtility;
@@ -65,7 +66,17 @@ public class Main {
                     user.setAddress(address);
                     user.setAmount(0);
 
-                    bankingApplicationUtility.createAccount(user);
+                    ApplicationMessage message = bankingApplicationUtility.createAccount(user);
+
+                    if(message.isSuccess()) {
+                        System.out.println(message.getData().getAccountNumber());
+                        System.out.println(message.getData().getName());
+                        System.out.println(message.getData().getAddress());
+                        System.out.println(message.getData().getAmount());
+                    } else {
+                        System.out.println("Sorry! Try again.");
+                    }
+
                     break;
 
                 case 2:

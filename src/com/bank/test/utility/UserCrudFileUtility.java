@@ -23,6 +23,7 @@ public class UserCrudFileUtility implements UserCrudUtility {
 
     @Override
     public ApplicationMessage saveUserDetails(User user) {
+
         ApplicationMessage applicationMessage = new ApplicationMessage();
 
         try {
@@ -35,12 +36,15 @@ public class UserCrudFileUtility implements UserCrudUtility {
 
             fileWriter.close();
 
+            //success
             applicationMessage.setSuccess(true);
             applicationMessage.setErrorMessage(null);
+            applicationMessage.setData(user);
 
         } catch (IOException e) {
             applicationMessage.setSuccess(false);
             applicationMessage.setErrorMessage(e.getMessage());
+            applicationMessage.setData(null);
         }
 
         return applicationMessage;

@@ -11,8 +11,8 @@ public class BankingApplicationUtility {
         userCrudUtility = new UserCrudFileUtility();
     }
 
-    public void createAccount(User user) {
-        userCrudUtility.saveUserDetails(user);
+    public ApplicationMessage createAccount(User user) {
+        return userCrudUtility.saveUserDetails(user);
     }
 
     public void depositAmount(Long accountNumber, Double deposit) {
