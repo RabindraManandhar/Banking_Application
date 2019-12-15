@@ -32,7 +32,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         User user = null;
-        UserUtility userUtility = new UserUtility();
+//        UserUtility userUtility = new UserUtility();
         Random random = new Random();
 
         BankingApplicationUtility bankingApplicationUtility = new BankingApplicationUtility();
