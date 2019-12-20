@@ -3,7 +3,7 @@ package com.bank.test;
 import com.bank.test.model.ApplicationMessage;
 import com.bank.test.model.User;
 import com.bank.test.utility.BankingApplicationUtility;
-import com.bank.test.utility.UserUtility;
+//import com.bank.test.utility.UserUtility;
 
 import java.util.Random;
 import java.util.Scanner;
