@@ -8,8 +8,8 @@ public class BankingApplicationUtility {
     private UserCrudUtility userCrudUtility;
 
     public BankingApplicationUtility() {
-        userCrudUtility = new UserCrudFileUtility();
-//        userCrudUtility = new UserCrudDatabaseUtility();
+//        userCrudUtility = new UserCrudFileUtility();
+        userCrudUtility = new UserCrudDatabaseUtility();
     }
 
     public ApplicationMessage createAccount(User user) {
