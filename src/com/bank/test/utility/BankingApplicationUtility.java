@@ -9,6 +9,7 @@ public class BankingApplicationUtility {
 
     public BankingApplicationUtility() {
         userCrudUtility = new UserCrudFileUtility();
+//        userCrudUtility = new UserCrudDatabaseUtility();
     }
 
     public ApplicationMessage createAccount(User user) {
@@ -62,6 +63,12 @@ public class BankingApplicationUtility {
     }
 
     public void closeAccount(Long accountNumber) {
-        userCrudUtility.deleteUser(getAccountDetails(accountNumber));
+        User user = getAccountDetails(accountNumber);
+
+        if (user == null) {
+            System.out.println("Sorry! This account doesn't exist in our system.");
+        } else {
+            userCrudUtility.deleteUser(user);
+        }
     }
 }

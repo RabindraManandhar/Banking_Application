@@ -44,7 +44,7 @@ public class Main {
             System.out.println("2. Deposit Fund");
             System.out.println("3. Withdraw Fund");
             System.out.println("4. View Account Details");
-            System.out.println("5. Delete Account Details");
+            System.out.println("5. Close Account");
 
             System.out.println("Enter your choice");
             int userChoice = scanner.nextInt();
@@ -94,13 +94,23 @@ public class Main {
 //                    Double withdraw = askAmount();
 
                     bankingApplicationUtility.withdrawAmount(askAccountNumber(), askAmount());
-
                     break;
 
                 case 4:
 //                    System.out.println("Enter your Account Number to see the account details.");
 //                    Long accountNo = scanner.nextLong();
-                    bankingApplicationUtility.getAccountDetails(askAccountNumber());
+                    user = bankingApplicationUtility.getAccountDetails(askAccountNumber());
+
+                    if(user == null) {
+                        System.out.println("Sorry! This account doesn't exist in our system.");
+                    } else {
+                        System.out.println(user.getId());
+                        System.out.println(user.getAccountNumber());
+                        System.out.println(user.getName());
+                        System.out.println(user.getAddress());
+                        System.out.println(user.getAmount());
+                    }
+
                     break;
 
                 case 5:
